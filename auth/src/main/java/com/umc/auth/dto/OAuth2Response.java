@@ -1,4 +1,4 @@
-package com.example.oauthsession.dto;
+package com.umc.auth.dto;
 
 public interface OAuth2Response {
     String getProvider();
