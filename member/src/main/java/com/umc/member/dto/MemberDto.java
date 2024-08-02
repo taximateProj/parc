@@ -1,5 +1,6 @@
 package com.umc.member.dto;
 
+import com.umc.member.domain.enums.Role;
 import lombok.Getter;
 import lombok.Setter;
 

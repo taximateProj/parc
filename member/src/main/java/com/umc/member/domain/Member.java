@@ -8,6 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -21,9 +22,9 @@ import org.hibernate.annotations.DynamicUpdate;
 @AllArgsConstructor
 public class Member extends BaseEntity {
 
+    @NotNull
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // 내가 사용하는 db에게 맡김
-    private Long id;
+    private String username;
 
     private String name;
 

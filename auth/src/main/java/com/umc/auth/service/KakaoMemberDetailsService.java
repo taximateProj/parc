@@ -1,21 +1,20 @@
 package com.umc.auth.service;
 
 
-import com.umc.auth.dto.KakaoMemberDetails;
-import com.umc.auth.dto.KakaoUserInfo;
+import com.umc.auth.dto.CustomOAuth2User;
+import com.umc.auth.dto.KakaoResponseDto;
+import com.umc.auth.dto.OAuth2Response;
+import com.umc.member.domain.Member;
+import com.umc.member.domain.enums.Role;
+import com.umc.member.dto.MemberDto;
+import com.umc.member.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-
-
-import java.lang.reflect.Member;
-import java.util.Collections;
 
 @Service
 @RequiredArgsConstructor
@@ -27,24 +26,54 @@ public class KakaoMemberDetailsService extends DefaultOAuth2UserService {
     @Override
     public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
         OAuth2User oAuth2User = super.loadUser(userRequest);
-        KakaoUserInfo kakaoUserInfo = new KakaoUserInfo(oAuth2User.getAttributes()); //email 데이터의 구조 때문에 따로 뺌
+        System.out.print("이건 oAuth2User.gettAtt");
+        System.out.println(oAuth2User.getAttributes());
+//        KakaoUserInfo oAuth2Response = new KakaoUserInfo(oAuth2User.getAttributes()); //email 데이터의 구조 때문에 따로 뺌
 
-        System.out.println(kakaoUserInfo.getEmail());
-        Member member = memberRepository.findByEmail(kakaoUserInfo.getEmail())
-                .orElseGet(() ->
-                        memberRepository.save(
-                                Member.builder()
-                                        .email(kakaoUserInfo.getEmail())
-                                        .name(oAuth2User.getName())
-                                        .role(Role.USER)
-                                        .gender(Gender.NONE)
-                                        .build()
-                        )
-                );
-        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(member.getRole().name());
+        OAuth2Response oAuth2Response = new KakaoResponseDto(oAuth2User.getAttributes());
+        String username = oAuth2Response.getProvider()+" "+oAuth2Response.getProviderId();
+        System.out.println(username);
 
-        return new KakaoMemberDetails(String.valueOf(member.getEmail()),
-                Collections.singletonList(authority),
-                oAuth2User.getAttributes());
+        Member existData = memberRepository.findByUsername(username);
+        System.out.println(existData);
+
+        String role = "ROLE_USER";
+
+        if (existData == null) {
+            System.out.println("I first time login!");
+
+
+            memberRepository.save(Member.builder()
+                    .role(Role.USER)
+                    .email(oAuth2Response.getEmail())
+                    .username(username)
+                    .build());
+
+            MemberDto memberDto = new MemberDto();
+            memberDto.setUsername(username);
+            memberDto.setRole(role);
+
+            return new CustomOAuth2User(memberDto);
+
+
+
+        } else { // 왜 있을 때는 다시 set 하지?? 그냥 이미 있는 유저라고 반환해야되는거 아닌가? -> login 하면서 회원 정보 update 해주는 정책 (이거는 정해야할듯?)
+            System.out.println("I login!");
+            existData.setUsername(username);
+            existData.setEmail(oAuth2Response.getEmail());
+            memberRepository.save(existData);
+
+            MemberDto memberDto = new MemberDto();
+            memberDto.setUsername(username);
+            memberDto.setRole(role);
+
+            return new CustomOAuth2User(memberDto);
+        }
+
+//        SimpleGrantedAuthority authority = new SimpleGrantedAuthority(member.getRole().name());
+//
+//        return new KakaoMemberDetails(String.valueOf(member.getEmail()),
+//                Collections.singletonList(authority),
+//                oAuth2User.getAttributes());
     }
 }
