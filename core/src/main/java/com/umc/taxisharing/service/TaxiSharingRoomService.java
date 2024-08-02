@@ -47,8 +47,8 @@ public class TaxiSharingRoomService {
 			.roomName(room.getRoomName())
 			.departurePoint(room.getDeparturePoint())
 			.arrivePoint(room.getArrivePoint())
-			.departureTime(room.getDepartureTime().toString())
-			.estimatedFare(room.getEstimatedFare().getAmount())
+			.departureTime(room.getDepartureTime())
+			.estimatedFare(room.getEstimatedFare())
 			.currentMembers(room.getParticipants() != null ? room.getParticipants().size() : 0)
 			.totalMembers(4)  // Replace with actual logic if needed
 			.isFull(room.getParticipants() != null ? room.getParticipants().size() >= 4 : false)

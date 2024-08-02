@@ -15,4 +15,13 @@ public abstract class BaseEntity {
 	@Field
 	@LastModifiedDate
 	private LocalDateTime updatedAt;
+
+	// Getters 추가
+	public LocalDateTime getCreatedAt() {
+		return createdAt;
+	}
+
+	public LocalDateTime getUpdatedAt() {
+		return updatedAt;
+	}
 }

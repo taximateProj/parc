@@ -1,5 +1,7 @@
 package com.umc.taxisharing.domain;
 
+import java.util.List;
+
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
@@ -20,10 +22,17 @@ public class Member {
 	private String name;
 
 	@Field
-	private String email;
+	private String nickName;
 
 	@Field
 	private Gender gender;  // enum 필드 추가
+
+	@Field
+	private String university;
+
+	@Field
+	private List<BankAccount> bankAccounts;
+
 }
 
 enum Gender {

@@ -1,5 +1,6 @@
 package com.umc.taxisharing.domain;
 
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
@@ -17,15 +18,12 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class BankAccount {
 
-	@Field
-	private String id; // MongoDB에서는 일반적으로 ID를 String으로 사용합니다.
+	@Id
+	private String id; //
 
 	@Field
 	private String bank;
 
 	@Field
 	private String accountNumber;
-
-	@DBRef
-	private Member member;
 }
