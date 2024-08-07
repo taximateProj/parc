@@ -2,19 +2,11 @@ package com.umc.taxisharing.domain;
 
 import java.math.BigDecimal;
 
-import org.springframework.data.mongodb.core.mapping.Field;
+import jakarta.persistence.Embeddable;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-
-@Getter
-@NoArgsConstructor
+@Embeddable
 public class Money {
 
-	@Field
 	private BigDecimal amount;
 
-	public Money(BigDecimal amount) {
-		this.amount = amount;
-	}
 }

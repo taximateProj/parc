@@ -5,25 +5,28 @@ import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import com.umc.taxisharing.domain.common.BaseEntity;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Document(collection = "bankAccounts")
 @Getter
-@Builder
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
-@AllArgsConstructor
-public class BankAccount {
+@Setter
+@Entity
+public class BankAccount extends BaseEntity {
 
 	@Id
-	private String id; //
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-	@Field
 	private String bank;
 
-	@Field
 	private String accountNumber;
 }

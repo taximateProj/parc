@@ -1,6 +1,5 @@
 package com.umc.taxisharing.dto;
 
-import java.math.BigDecimal;
 import java.time.ZonedDateTime;
 
 import com.umc.taxisharing.domain.Money;
@@ -10,7 +9,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class TaxiSharingRoomInfoResponse {
+public class TaxiSharingRoomDTO {
 	private String roomName;
 	private String departurePoint;
 	private String arrivePoint;
