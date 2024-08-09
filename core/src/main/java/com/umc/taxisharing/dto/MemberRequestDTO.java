@@ -12,5 +12,7 @@ public class MemberRequestDTO {
 	private String name;
 	private String nickName;
 	private String university;
+	private String phoneNumber;
 	private List<BankAccountDTO> bankAccounts;
+	private String gender;
 }

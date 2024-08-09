@@ -1,6 +1,7 @@
 package com.umc.taxisharing.domain;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -25,4 +26,5 @@ public class TaxiSharingRoom {
 	private ZonedDateTime departureTime;
 
 	private Money estimateFare;
+
 }

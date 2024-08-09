@@ -31,7 +31,10 @@ public enum CommonErrorCode implements ErrorCode {
     WEBSOCKET_CONNECTION_FAILED(HttpStatus.SERVICE_UNAVAILABLE, "WEBSOCKET-001", "웹소켓 연결 실패"),
     WEBSOCKET_MESSAGE_SEND_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "WEBSOCKET-002", "메시지 전송 실패"),
     WEBSOCKET_MESSAGE_RECEIVE_FAILED(HttpStatus.INTERNAL_SERVER_ERROR, "WEBSOCKET-003", "메시지 수신 실패"),
-    WEBSOCKET_SESSION_NOT_FOUND(HttpStatus.NOT_FOUND, "WEBSOCKET-004", "세션을 찾을 수 없음");
+    WEBSOCKET_SESSION_NOT_FOUND(HttpStatus.NOT_FOUND, "WEBSOCKET-004", "세션을 찾을 수 없음"),
+
+    // 멤버 관련 에러
+    MEMBER_NOT_FOUND(HttpStatus.NOT_FOUND, "MEMBER-001", "회원 정보를 찾을 수 없습니다");
 
     private final HttpStatus httpStatus;
     private final String code;
