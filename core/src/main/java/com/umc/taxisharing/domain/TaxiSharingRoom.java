@@ -15,7 +15,7 @@ import lombok.Setter;
 public class TaxiSharingRoom {
 
 	@Id
-	private String taxiRoomId;
+	private String id;
 
 	private String roomName;
 

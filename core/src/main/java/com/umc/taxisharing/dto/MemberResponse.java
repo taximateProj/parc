@@ -2,6 +2,8 @@ package com.umc.taxisharing.dto;
 
 import java.util.List;
 
+import com.umc.taxisharing.domain.Gender;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +21,7 @@ public class MemberResponse {
 		Long memberId;
 		String name;
 		String nickName;
-		String gender;
+		Gender gender;
 		String university;
 		String phoneNumber;
 		List<BankAccountDTO> bankAccounts;

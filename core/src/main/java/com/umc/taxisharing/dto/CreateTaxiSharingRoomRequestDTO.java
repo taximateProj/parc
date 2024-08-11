@@ -4,18 +4,15 @@ import java.time.ZonedDateTime;
 
 import com.umc.taxisharing.domain.Money;
 
-import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
-@Builder
-public class TaxiSharingRoomDTO {
+@Setter
+public class CreateTaxiSharingRoomRequestDTO {
 	private String roomName;
 	private String departurePoint;
-	private String arrivePoint;
+	private String arrivalPoint;
 	private ZonedDateTime departureTime;
-	private Money estimatedFare;
-	private int currentMembers;
-	private int totalMembers;
-	private boolean isFull;
+	private Money estimateFare;
 }

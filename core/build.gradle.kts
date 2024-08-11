@@ -8,4 +8,5 @@ dependencies {
 
     implementation("mysql:mysql-connector-java:8.0.30")
     implementation("org.springframework.boot:spring-boot-starter-validation")
+    implementation(project(":common"))
 }
